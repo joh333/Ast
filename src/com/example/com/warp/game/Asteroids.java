@@ -18,7 +18,7 @@ public class Asteroids extends Sprite {
 public Asteroids(int ScreenWidth,int ScreenHeight,Random rnd)
 {
 	super();
-	maxSpeed=4;
+	maxSpeed=2;
 	rotationSpeed=1f;
 	bitmapID= R.drawable.asteroid;
 this.screenWidth=ScreenWidth;
@@ -37,11 +37,23 @@ this.rnd=rnd;
 		
 		Vector2D direction =Vector2D.difference(destination, position); // gives the direction needed to travel from position to target
 		direction.normalize( ); // we need it as a unit vector
-		position =Vector2D.sum(position,Vector2D.product((double)speed,direction ));
-		x=(int)position.x;
-		y=(int)position.y;
-
-	
+		Vector2D directionSpeed=direction;
+		directionSpeed.multiply(speed);
+		position =Vector2D.sum(position,directionSpeed);
+		//x=(int)position.x;
+		//y=(int)position.y;
+		if(x>destinationX)
+			x=x-speed;
+		if(x<destinationX)
+			x=x+speed;
+		
+		if(y>destinationY)
+			y=y-speed;
+		if(y<destinationY)
+			y=y+speed;
+		x=(float)position.x;
+		y=(float)position.y;
+		
 		if(bitmap==null)
 			return;
 		//Check of Asteroid reached destination
@@ -56,13 +68,13 @@ this.rnd=rnd;
 		int originX=screenWidth/2;
 		int originY=screenHeight/2;
     	double degree=rnd.nextInt(360);
-		int radius=(int) ((screenHeight)*1.2);
+		int radius=(int) (screenHeight)/2;
 		x = originX +(int)(Math.cos(degree)*radius);
     	y=  originY +(int) (Math.sin(degree)*radius);
     	speed=1+rnd.nextInt(maxSpeed);
     	destinationX = originX +(int)(Math.cos(Math.toRadians(degree+180))*(radius));
     	destinationY=  originY +(int) (Math.sin(Math.toRadians(degree+180))*(radius));
-    	scale=rnd.nextFloat()*4;
+    	scale=rnd.nextFloat()*2;
     	rotationSpeed=-4+rnd.nextInt(8);
 	}
 

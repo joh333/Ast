@@ -51,7 +51,11 @@ missileState=MissileState.idle;
 				return;
 		//Check of Asteroid reached destination
 		if(Math.abs(x-destinationX)<1+speed && Math.abs(y-destinationY)<1+speed)
+		{
 			missileState=MissileState.idle;
+			x=-100;
+			y=-100;
+		}
 	
 		}
 		

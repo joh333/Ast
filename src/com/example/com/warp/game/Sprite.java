@@ -8,8 +8,8 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 
 public class Sprite {
-	public int x;
-	public int y;
+	public float x;
+	public float y;
 	public Bitmap bitmap;
 	public int bitmapID;
 	public float Angle;
